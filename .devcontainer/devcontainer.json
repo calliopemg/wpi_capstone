@@ -1,0 +1,35 @@
+{
+	"name": "Capstone Development Container",
+	"image": "mcr.microsoft.com/devcontainers/base:0-ubuntu-22.04",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/python:1": {},
+		"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+			"packages": "build-essential,cppcheck,valgrind,clang,lldb,llvm,gdb,git"
+		}
+	},
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.cpptools",
+				"sirtori.indenticator",
+				"ms-python.python",
+				"mutantdino.resourcemonitor"
+			]
+		}
+	},
+
+	//	Enable C++ Debugging
+	"capAdd": ["SYS_PTRACE"],
+	"securityOpt": ["seccomp=unconfined"]
+
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+}
