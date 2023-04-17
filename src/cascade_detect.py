@@ -1,10 +1,4 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
 import cv2
-
 from time import sleep
 from picamera2 import MappedArray, Picamera2, Preview
 from libcamera import Transform
@@ -39,12 +33,13 @@ def facial_recognition(image):
             cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2)
 
     # Save the result image
-    cv2.imwrite('face_rectangles.jpg', image)
+    cv2.imwrite('faces_rectangles.jpg', image)
 
 
 def animal_recognition(image):
     # Load a cascade file for detecting faces
     haarcascades_path = '../opencv/data/haarcascades/'
+    # TODO: add animal classifier
     animal_cascade = cv2.CascadeClassifier(haarcascades_path + 'tbd.xml')
 
     # Convert to grayscale
@@ -64,7 +59,7 @@ def animal_recognition(image):
         cv2.rectangle(image, (fx, fy), (fx + fw, fy + fh), (255, 0, 0), 2)
 
     # Save the result image
-    cv2.imwrite('animal_rectangles.jpg', image)
+    cv2.imwrite('animals_rectangles.jpg', image)
 
 
 def camera():
@@ -77,7 +72,7 @@ def camera():
     picam2.configure(still_config)
 
     picam2.start()
-    sleep(1)
+    sleep(1)  # do we need to sleep here? Giving the camera a chance to "auto-adjust"?
     image = picam2.capture_array()
 
     # Save the original image
@@ -87,6 +82,8 @@ def camera():
 
 
 if __name__ == '__main__':
+    # TODO: only save image if detectMultiScale returns objects (Object Detection)
+    # TODO: take picture every x seconds instead of once per script run
     image = camera()
     facial_recognition(image)
     # animal_recognition(image)
