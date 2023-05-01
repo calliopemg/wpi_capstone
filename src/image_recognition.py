@@ -37,7 +37,7 @@ def facial_recognition(image):
 
 
 def animal_recognition(image):
-    # Load a cascade file for detecting faces
+    # Load a cascade file for detecting animals
     haarcascades_path = '../opencv/data/haarcascades/'
     # TODO: add animal classifier
     animal_cascade = cv2.CascadeClassifier(haarcascades_path + 'tbd.xml')
